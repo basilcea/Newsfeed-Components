@@ -3,11 +3,13 @@ const menu = document.querySelector(".menu");
 
 const toggleMenu = ()=> {
   // Toggle the "menu--open" class on your menu refence.
-
+ //const tween = TweenMax.fromTo('.menu', .8, {x:-400, display:'block'},{x:0, display:'block'})
   if (menu.classList.contains("menu--open")) {
-    TweenMax.fromTo('.menu', .8, { x:0,display:'block'},{x:-350})
+   TweenMax.fromTo('.menu', .8, { x:0,display:'block'},{x:-350})
+   //tween.play()
   } else {
     TweenMax.fromTo('.menu', .8, {x:-100},{x:0})
+    //tween.reverse()
   }
   menu.classList.toggle("menu--open");
 };

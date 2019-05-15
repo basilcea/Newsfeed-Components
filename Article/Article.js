@@ -5,8 +5,7 @@ class Article {
     // assign this.domElement to the passed in domElement
     this.domElement = domElement ; 
     this.headingValue = headingValue;
-    this.date = date;
-    this.paragraph = paragraph;
+    this.textarea = textarea;
     // create a reference to the ".expandButton" class. 
     this.expandButton = this.domElement.querySelector('.expandButton');
     // Using your expandButton reference, update the text on your expandButton to say "expand"
@@ -18,19 +17,33 @@ class Article {
       console.log(this.expandButton.textContent)
       this.expandButton.textContent ==='Click to Expand' ? this.expandButton.textContent='Click to Close': this.expandButton.textContent='Click to Expand'
     })
-    //this.createArticle();
+    this.createCloseButton();
   }
 
   expandArticle() {
     this.domElement.classList.toggle('article-open');
     // Using our reference to the domElement, toggle a class to expand or hide the article.
   }
-  // createArticle(){
-    // const heading = document.createElement('h2');
-    // heading.innerText = this.heading;
-    // this.domElement.append(heading)
-    // for(let i=0 ;i< 3; i++){
-      // this.domElement.append( document.createElement('p'))
+  createCloseButton(){
+    const button = document.createElement('button');
+    button.style.float='right'
+    button.style.color='black';
+    button.textContent ='Close'
+    button.onclick =()=>{
+      TweenMax.to(this.domElement, 3, {x:-1400, onStart:changeState(), onComplete:()=>this.domElement.remove()})
+    }
+    const changeState =()=>{
+      button.textContent = 'deleting ...'
+    }
+
+    this.domElement.insertBefore(button, this.domElement.querySelector('p'));
+  }
+  createArticle(){
+    const heading = document.createElement('h2');
+    heading.innerText = this.headingValue;
+    this.domElement.prepend( document.createElement('textarea'))
+    // this.domElement.prepen(heading)
+    
     // }
     // const par = this.domElement.querySelectorAll('p');
   //  par[0].innerText =this.date.bind(this);
